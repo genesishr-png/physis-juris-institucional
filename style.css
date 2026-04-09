@@ -664,7 +664,6 @@ ul{list-style:none}
 .sol-card:hover {
   border-color: var(--border2);
   box-shadow: 0 0 50px rgba(201,168,76,0.14), inset 0 0 40px rgba(201,168,76,0.02);
-  transform: translateY(-6px);
 }
 .sol-card:hover::before, .sol-card:hover::after { opacity: 0.8; width: 30px; height: 30px; }
 .sol-card:hover .top-line { transform: scaleX(1); }
@@ -1085,8 +1084,44 @@ ul{list-style:none}
 .ft-copy strong { color: var(--gold); font-weight: 400; }
 
 /* ============================================================
+   WHATSAPP FLOAT
+   ============================================================ */
+.wa-float {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  background: rgba(3,5,10,0.85);
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  z-index: 990;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6), 0 0 15px rgba(201,168,76,0.15);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), background 0.3s var(--ease);
+  animation: waPulse 3s infinite;
+}
+.wa-float svg { width: 32px; height: 32px; }
+.wa-float:hover {
+  transform: scale(1.1) translateY(-4px);
+  background: var(--gold-glass);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7), 0 0 30px rgba(201,168,76,0.4);
+  animation: none;
+}
+
+/* ============================================================
    KEYFRAMES
    ============================================================ */
+@keyframes waPulse {
+  0% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(201, 168, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0); }
+}
 @keyframes eclipseReveal {
   0%   { opacity: 0; filter: brightness(0.1); }
   50%  { opacity: 0.5; filter: brightness(0.5); }

@@ -259,7 +259,7 @@
   }, { passive: true });
 
   // ---- 3D TILT EFFECT ON CARDS ----
-  document.querySelectorAll('.sol-card, .book-frame, .fund-portrait').forEach(card => {
+  document.querySelectorAll('.sol-card, .book-frame').forEach(card => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
       const x = e.clientX - rect.left;

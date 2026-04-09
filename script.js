@@ -214,17 +214,40 @@
         return;
       }
 
-      // Simulate send
+      // Use Fetch to send to Formspree
       btnSubmit.disabled = true;
       btnSubmit.querySelector('span').textContent = 'Enviando...';
 
-      setTimeout(() => {
-        form.querySelectorAll('input, textarea').forEach(f => { f.value = ''; f.style.display = 'none'; });
-        form.querySelector('.form-row').style.display = 'none';
-        form.querySelectorAll('.form-group').forEach(g => { g.style.display = 'none'; });
-        btnSubmit.style.display = 'none';
-        formSuccess.style.display = 'block';
-      }, 1200);
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+          form.querySelectorAll('input, textarea').forEach(f => { f.value = ''; f.style.display = 'none'; });
+          form.querySelector('.form-row').style.display = 'none';
+          form.querySelectorAll('.form-group').forEach(g => { g.style.display = 'none'; });
+          btnSubmit.style.display = 'none';
+          formSuccess.style.display = 'block';
+        } else {
+          response.json().then(data => {
+            if (Object.hasOwn(data, 'errors')) {
+              alert(data["errors"].map(error => error["message"]).join(", "));
+            } else {
+              alert("Oops! Ocorreu um erro no envio. Tente novamente.");
+            }
+          });
+          btnSubmit.disabled = false;
+          btnSubmit.querySelector('span').textContent = 'Enviar Mensagem';
+        }
+      }).catch(error => {
+        alert("Oops! Houve um problema ao conectar com o servidor.");
+        btnSubmit.disabled = false;
+        btnSubmit.querySelector('span').textContent = 'Enviar Mensagem';
+      });
     });
   }
 

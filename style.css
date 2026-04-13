@@ -298,7 +298,7 @@ ul{list-style:none}
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 800; /* Over everything except nav and popups */
+  z-index: 1; /* Atrás de todo o conteúdo interativo */
   opacity: 0.85;
 }
 
